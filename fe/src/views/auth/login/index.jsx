@@ -5,7 +5,7 @@ const Login = () => {
       <Card className="shadow">
         <Flex vertical align="center" gap={32}>
           <Flex align="center" gap={16}>
-            <Typography.Text className="text-[24px] text-primary">
+            <Typography.Text className="!text-[24px]">
               Đăng nhập
             </Typography.Text>
           </Flex>
