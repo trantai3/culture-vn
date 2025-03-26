@@ -863,6 +863,16 @@
     postcss "^8.4.41"
     tailwindcss "4.0.16"
 
+"@tailwindcss/vite@^4.0.16":
+  version "4.0.16"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/vite/-/vite-4.0.16.tgz#f17f1b9eaca7ad150775975a9c2959663b754b56"
+  integrity sha512-6mZVWhAyjVNMMRw0Pvv2RZfTttjsAClU8HouLNZbeLbX0yURMa0UYEY/qS4dB1tZlRpiDBnCLsGsWbxEyIjW6A==
+  dependencies:
+    "@tailwindcss/node" "4.0.16"
+    "@tailwindcss/oxide" "4.0.16"
+    lightningcss "1.29.2"
+    tailwindcss "4.0.16"
+
 "@types/babel__core@^7.20.5":
   version "7.20.5"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.20.5.tgz#3df15f27ba85319caa07ba08d0721889bb39c017"
