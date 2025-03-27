@@ -1,18 +1,53 @@
 import { Button, Card, Flex, Form, Input, Typography } from "antd";
+import { LOGIN_API, PROFILE_API } from "../../../api/constants";
+import useSignIn from "react-auth-kit/hooks/useSignIn";
+import { Navigate, useNavigate } from "react-router-dom";
+import useIsAuthenticated from "react-auth-kit/hooks/useIsAuthenticated";
+import useApi from "../../../hooks/useApi";
+import React, { useState } from "react";
 const Login = () => {
+  const signIn = useSignIn();
+  const navigate = useNavigate();
+  const isAuthenticated = useIsAuthenticated();
+  const Api = useApi();
+  const [loadingSubmit, setLoadingSubmit] = useState(false);
+  const handleSubmit = async (values) => {
+    setLoadingSubmit(true);
+    const resLogin = await Api.Post(LOGIN_API, values);
+    setLoadingSubmit(false);
+    if (!resLogin) return;
+
+    const resProfile = await Api.Get(PROFILE_API);
+    if (!resProfile) return;
+    console.log(resLogin.access_token);
+    const isLogged = signIn({
+      auth: {
+        token: resLogin.access_token,
+        type: "Bearer",
+      },
+      userState: resProfile,
+    });
+    // if (isLogged) navigate("/");
+  };
+  // if (isAuthenticated) return <Navigate to="/" />;
   return (
     <Flex justify="center" className="!py-20">
       <Card className="shadow">
         <Flex vertical align="center" gap={32}>
           <Flex align="center" gap={16}>
-            <Typography.Text className="text-[24px] text-primary">
+            <Typography.Text className="!text-[24px] text-primary">
               Đăng nhập
             </Typography.Text>
           </Flex>
-          <Form autoComplete="off" layout="vertical" className="w-[300px]">
+          <Form
+            onFinish={handleSubmit}
+            autoComplete="off"
+            layout="vertical"
+            className="w-[300px]"
+          >
             <Form.Item
-              label="Tên tài khoản"
-              name="userName"
+              label="Email"
+              name="email"
               rules={[
                 {
                   required: true,
@@ -39,6 +74,7 @@ const Login = () => {
               size="large"
               type="primary"
               htmlType="submit"
+              loading={loadingSubmit}
               className="w-full"
             >
               Đăng nhập
