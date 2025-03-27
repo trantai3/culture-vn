@@ -16,10 +16,13 @@ const Login = () => {
     const resLogin = await Api.Post(LOGIN_API, values);
     setLoadingSubmit(false);
     if (!resLogin) return;
-
-    const resProfile = await Api.Get(PROFILE_API);
+    console.log(resLogin);
+    const resProfile = await Api.Get(PROFILE_API, {
+      headers: {
+        Authorization: `Bearer ${resLogin.access_token}`,
+      },
+    });
     if (!resProfile) return;
-    console.log(resLogin.access_token);
     const isLogged = signIn({
       auth: {
         token: resLogin.access_token,

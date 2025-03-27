@@ -9,7 +9,6 @@ const useApi = () => {
   const authHeader = useAuthHeader();
   const signOut = useSignOut();
   const navigate = useNavigate();
-
   if (authHeader) Api.defaults.headers.common.Authorization = authHeader;
   else delete Api.defaults.headers.common.Authorization;
 
