@@ -27,9 +27,9 @@ const Login = () => {
       },
       userState: resProfile,
     });
-    // if (isLogged) navigate("/");
+    if (isLogged) navigate("/admin/dashboard");
   };
-  // if (isAuthenticated) return <Navigate to="/" />;
+  if (isAuthenticated) return <Navigate to="/admin/dashboard" />;
   return (
     <Flex justify="center" className="!py-20">
       <Card className="shadow">

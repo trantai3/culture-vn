@@ -20,7 +20,7 @@ const LayoutAdmin = () => {
         <Header className="custom-headeradmin">
           <HeaderAdmin headerInfo={headerInfo} />
         </Header>
-        <Content>
+        <Content className="!px-[30px]">
           <Outlet />
         </Content>
       </Layout>

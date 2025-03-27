@@ -5,7 +5,9 @@ const HeaderAdmin = ({ headerInfo }) => {
         {headerInfo.icon}
         <h1>{headerInfo.title}</h1>
       </div>
-      <div className="flex items-center"></div>
+      <div className="flex items-center">
+        
+      </div>
     </div>
   );
 };
