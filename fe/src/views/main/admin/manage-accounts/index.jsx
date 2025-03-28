@@ -1,5 +1,8 @@
 import { Col, Input, Row, Select, Table } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import { useEffect, useState } from "react";
+import { CLIENTS_LIST } from "../../../../api/constants";
+import useApi from "../../../../hooks/useApi";
 const ManageAccounts = () => {
   const options = [
     {
@@ -17,19 +20,19 @@ const ManageAccounts = () => {
   ];
   const columns = [
     {
-      title: "Tên",
-      dataIndex: "name",
-      key: "name",
+      title: "Họ và tên",
+      dataIndex: "full_name",
+      key: "full_name",
     },
     {
-      title: "Tuổi",
-      dataIndex: "age",
-      key: "age",
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
     },
     {
-      title: "Địa chỉ",
-      dataIndex: "address",
-      key: "address",
+      title: "Trạng thái",
+      dataIndex: "is_active",
+      key: "is_active",
     },
   ];
   const data = [
@@ -37,6 +40,17 @@ const ManageAccounts = () => {
     { key: "2", name: "Trần Thị B", age: 30, address: "Hồ Chí Minh" },
     { key: "3", name: "Lê Văn C", age: 22, address: "Đà Nẵng" },
   ];
+  const Api = useApi();
+  const [user, setUser] = useState(null);
+  const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(20);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await Api.Get(CLIENTS_LIST(page, perPage));
+      setUser(response.users);
+    };
+    fetchData();
+  }, [page, perPage]);
   return (
     <>
       <div class="!mt-[24px] font-[700] text-[20px] text-[#0F1012]">

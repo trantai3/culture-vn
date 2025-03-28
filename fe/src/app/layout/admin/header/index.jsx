@@ -3,10 +3,11 @@ import { Avatar, Dropdown, Typography, Modal, Input } from "antd";
 import { UserOutlined, LockOutlined, LogoutOutlined } from "@ant-design/icons";
 import useSignOut from "react-auth-kit/hooks/useSignOut";
 import ChangePassword from "../../../../views/auth/changePassword";
+import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 const HeaderAdmin = ({ headerInfo }) => {
   const [changePassword, setChangePassword] = useState(false);
   const singOut = useSignOut();
-
+  const authUser = useAuthUser();
   const handleChangePassword = () => {
     setChangePassword((prev) => !prev);
   };
@@ -48,7 +49,7 @@ const HeaderAdmin = ({ headerInfo }) => {
           trigger={["click"]}
         >
           <div className="cursor-pointer flex items-center gap-2">
-            <Typography.Text strong>admin</Typography.Text>
+            <Typography.Text strong>{authUser.username}</Typography.Text>
             <Avatar size="large" icon={<UserOutlined />} />
           </div>
         </Dropdown>

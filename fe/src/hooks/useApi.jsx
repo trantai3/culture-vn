@@ -32,36 +32,36 @@ const useApi = () => {
     return { success: false };
   };
 
-  const Get = async (url) => {
+  const Get = async (url, config) => {
     try {
-      const res = await Api.get(url);
+      const res = await Api.get(url, config);
       return Result(res);
     } catch (e) {
       return Exception(e);
     }
   };
 
-  const Post = async (url, data) => {
+  const Post = async (url, data, config) => {
     try {
-      const res = await Api.post(url, data);
+      const res = await Api.post(url, data, config);
       return Result(res);
     } catch (e) {
       return Exception(e);
     }
   };
 
-  const Put = async (url, data) => {
+  const Put = async (url, data, config) => {
     try {
-      const res = await Api.put(url, data);
+      const res = await Api.put(url, data, config);
       return Result(res);
     } catch (e) {
       return Exception(e);
     }
   };
 
-  const Delete = async (url) => {
+  const Delete = async (url, config) => {
     try {
-      const res = await Api.delete(url);
+      const res = await Api.delete(url, config);
       return Result(res);
     } catch (e) {
       return Exception(e);
