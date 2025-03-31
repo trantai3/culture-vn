@@ -9,10 +9,6 @@ const DashboardAdmin = lazy(() =>
 const ManageAccountsAdmin = lazy(() =>
   import("../../views/main/admin/manage-accounts/index")
 );
-const ManageUsersAdmin = lazy(() =>
-  import("../../views/main/admin/manage-users/index")
-);
-
 const CaptionImage = lazy(() =>
   import("../../views/main/client/CaptionImage/index")
 );
@@ -40,14 +36,6 @@ const router = createBrowserRouter([
         element: (
           <Suspense>
             <DashboardAdmin />
-          </Suspense>
-        ),
-      },
-      {
-        path: "manage-users",
-        element: (
-          <Suspense>
-            <ManageUsersAdmin />
           </Suspense>
         ),
       },

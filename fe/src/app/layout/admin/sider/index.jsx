@@ -1,7 +1,6 @@
 import { Menu } from "antd";
 import { Link } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
-import { FaUsers } from "react-icons/fa";
 import { RiAdminFill } from "react-icons/ri";
 const items = [
   {
@@ -12,12 +11,6 @@ const items = [
   },
   {
     key: "2",
-    link: "/admin/manage-users",
-    title: "Quản lý người dùng",
-    icon: FaUsers,
-  },
-  {
-    key: "3",
     link: "/admin/manage-accounts",
     title: "Quản lý tài khoản",
     icon: RiAdminFill,

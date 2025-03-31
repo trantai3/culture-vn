@@ -13,7 +13,7 @@ const LayoutAdmin = () => {
   });
   return (
     <Layout>
-      <Sider className="custom-sideradmin h-screen min-h-screen">
+      <Sider className="custom-sideradmin min-h-screen">
         <SiderAdmin setHeaderInfo={setHeaderInfo} />
       </Sider>
       <Layout>
