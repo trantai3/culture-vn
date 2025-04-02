@@ -9,6 +9,7 @@ const Login = () => {
   const signIn = useSignIn();
   const navigate = useNavigate();
   const isAuthenticated = useIsAuthenticated();
+  console.log("isAuthenticated: ", isAuthenticated);
   const Api = useApi();
   const [loadingSubmit, setLoadingSubmit] = useState(false);
   const handleSubmit = async (values) => {
@@ -16,22 +17,22 @@ const Login = () => {
     const resLogin = await Api.Post(LOGIN_API, values);
     setLoadingSubmit(false);
     if (!resLogin) return;
-    console.log("resLogin", resLogin);
     const resProfile = await Api.Get(PROFILE_API, {
       headers: {
         Authorization: `Bearer ${resLogin.access_token}`,
       },
     });
-    console.log("resProfile", resProfile);
+    let role = resProfile.role;
     if (!resProfile) return;
-    const isLogged = signIn({
+    signIn({
       auth: {
         token: resLogin.access_token,
         type: "Bearer",
       },
       userState: resProfile,
     });
-    if (isLogged) navigate("/admin/dashboard");
+    if (role === "admin") navigate("/admin/dashboard");
+    else navigate("/");
   };
   if (isAuthenticated) return <Navigate to="/admin/dashboard" />;
   return (

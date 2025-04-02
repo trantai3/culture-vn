@@ -12,6 +12,7 @@ const ManageAccountsAdmin = lazy(() =>
 const CaptionImage = lazy(() =>
   import("../../views/main/client/CaptionImage/index")
 );
+import PermissionProvider from "../../components/providers/PermissionProvider";
 
 const Home = lazy(() => import("../../views/main/client/home/index"));
 const router = createBrowserRouter([
@@ -26,9 +27,11 @@ const router = createBrowserRouter([
   {
     path: "admin",
     element: (
-      <Suspense>
-        <LayoutAdmin />
-      </Suspense>
+      <PermissionProvider>
+        <Suspense>
+          <LayoutAdmin />
+        </Suspense>
+      </PermissionProvider>
     ),
     children: [
       {
