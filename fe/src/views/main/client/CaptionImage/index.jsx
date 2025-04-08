@@ -80,7 +80,6 @@ const CaptionImage = () => {
       setIsEditing(false);
     } catch (error) {
       console.error("Error saving caption:", error);
-      // You could add error handling here
     } finally {
       setIsLoading(false);
     }
@@ -94,7 +93,6 @@ const CaptionImage = () => {
         onFinish={handleSubmit}
         className="bg-white !ml-[30px] !mr-[30px] home-page h-[50%] !mt-[24px] shadow-md rounded-lg !p-6 flex flex-col justify-between"
       >
-        {/* Preview Section */}
         <div className="flex flex-5 gap-4">
           <div className="flex-3 flex items-center justify-center bg-gray-100 p-4 text-center rounded-md min-h-[80px]">
             {previewUrl ? (

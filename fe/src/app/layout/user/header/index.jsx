@@ -42,12 +42,11 @@ const Header = ({ headerInfo }) => {
 
   return (
     <div className="flex justify-between items-center">
-      <div className="flex items-center gap-2">
+      <div className="flex text-white items-center gap-2">
         {headerInfo?.icon}
         <h1>{headerInfo?.title}</h1>
       </div>
       <div className="flex items-center">
-        {/* Kiểm tra nếu chưa đăng nhập */}
         {!authUser ? (
           <div className="flex gap-3">
             <Button type="primary" onClick={() => navigate("/login")}>
@@ -63,7 +62,7 @@ const Header = ({ headerInfo }) => {
             }}
             trigger={["click"]}
           >
-            <div className="cursor-pointer flex items-center gap-2">
+            <div className="cursor-pointer text-white flex items-center gap-2">
               <Typography.Text strong>{authUser.username}</Typography.Text>
               <Avatar size="large" icon={<UserOutlined />} />
             </div>
