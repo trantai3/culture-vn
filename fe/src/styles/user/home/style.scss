@@ -17,3 +17,10 @@
   pointer-events: none;
   z-index: 0;
 }
+
+@media screen and (max-width: 400px) {
+  .responsive-buttons2,
+  .responsive-buttons1 {
+    justify-content: center;
+  }
+}

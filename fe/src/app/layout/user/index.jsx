@@ -8,7 +8,7 @@ import FooterClient from "../user/footer/index";
 const LayoutClient = () => {
   return (
     <Layout>
-      <Header className="!px-[20px] sm:px-[50px]">
+      <Header className="header-layout">
         <HeaderClient />
       </Header>
       <Content>
