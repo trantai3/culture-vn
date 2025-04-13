@@ -118,7 +118,7 @@ const Header = ({ headerInfo }) => {
             }}
             trigger={["click"]}
           >
-            <div className="cursor-pointer flex items-center gap-2">
+            <div className="cursor-pointer text-white flex items-center gap-2">
               <Typography.Text strong>{authUser.username}</Typography.Text>
               <Avatar size="large" icon={<UserOutlined />} />
             </div>

@@ -80,7 +80,6 @@ const CaptionImage = () => {
       setIsEditing(false);
     } catch (error) {
       console.error("Error saving caption:", error);
-      // You could add error handling here
     } finally {
       setIsLoading(false);
     }
