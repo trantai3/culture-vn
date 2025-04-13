@@ -13,7 +13,10 @@ const CaptionImage = lazy(() =>
   import("../../views/main/client/CaptionImage/index")
 );
 import PermissionProvider from "../../components/providers/PermissionProvider";
-
+import { ConfigProvider } from "antd";
+import themeConfig from "../../config/themeConfig";
+import viVN from "antd/locale/vi_VN";
+import About from "../../views/main/client/About";
 const Home = lazy(() => import("../../views/main/client/home/index"));
 const router = createBrowserRouter([
   {
@@ -53,29 +56,12 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "caption-image",
     element: (
-      <Suspense>
-        <LayoutClient />
-      </Suspense>
-    ),
-    children: [
-      {
-        path: "",
-        element: (
-          <Suspense>
-            <CaptionImage />
-          </Suspense>
-        ),
-      },
-    ],
-  },
-  {
-    path: "",
-    element: (
-      <Suspense>
-        <LayoutClient />
-      </Suspense>
+      <ConfigProvider theme={themeConfig} locale={viVN}>
+        <Suspense>
+          <LayoutClient />
+        </Suspense>
+      </ConfigProvider>
     ),
     children: [
       {
@@ -83,6 +69,22 @@ const router = createBrowserRouter([
         element: (
           <Suspense>
             <Home />
+          </Suspense>
+        ),
+      },
+      {
+        path: "caption-image",
+        element: (
+          <Suspense>
+            <CaptionImage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "about",
+        element: (
+          <Suspense>
+            <About />
           </Suspense>
         ),
       },

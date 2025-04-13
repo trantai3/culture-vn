@@ -1,16 +1,28 @@
-import { useState } from "react";
-import { Avatar, Dropdown, Typography, Button } from "antd";
-import { UserOutlined, LockOutlined, LogoutOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Avatar, Dropdown, Typography, Button, Drawer } from "antd";
+import {
+  UserOutlined,
+  LockOutlined,
+  LogoutOutlined,
+  MenuOutlined,
+} from "@ant-design/icons";
+import { useNavigate, Link } from "react-router-dom";
 import useSignOut from "react-auth-kit/hooks/useSignOut";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import ChangePassword from "../../../../views/auth/changePassword";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Header = ({ headerInfo }) => {
   const [changePassword, setChangePassword] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
   const signOut = useSignOut();
-  const authUser = useAuthUser(); // Kiểm tra trạng thái đăng nhập
+  const authUser = useAuthUser();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: true });
+  }, []);
 
   const handleChangePassword = () => {
     setChangePassword((prev) => !prev);
@@ -40,16 +52,59 @@ const Header = ({ headerInfo }) => {
     },
   ];
 
+  const toggleDrawer = () => {
+    setOpenDrawer((prev) => !prev);
+  };
+
   return (
-    <div className="flex justify-between items-center">
-      <div className="flex items-center gap-2">
-        {headerInfo?.icon}
-        <h1>{headerInfo?.title}</h1>
+    <header
+      className="md:px-6 h-full flex justify-between items-center sticky top-0 z-50"
+      data-aos="fade-down"
+    >
+      {/* Left: Logo + Title + Links */}
+      <div className="flex items-center gap-4 md:gap-8">
+        <div className="flex items-center gap-2">
+          {headerInfo?.icon}
+          <h1 className="text-base md:text-xl font-semibold text-[#5a3e36]">
+            {headerInfo?.title}
+          </h1>
+        </div>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex gap-6 text-[#4a3d35] font-medium">
+          <Link
+            to="/"
+            className="hover:text-[#7e5c49] transition-colors duration-300"
+          >
+            Trang chủ
+          </Link>
+          <Link
+            to="/about"
+            className="hover:text-[#7e5c49] transition-colors duration-300"
+          >
+            Về chúng tôi
+          </Link>
+          <Link
+            to="/caption-image"
+            className="hover:text-[#7e5c49] transition-colors duration-300"
+          >
+            Caption ảnh
+          </Link>
+        </nav>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden text-2xl text-[#4a3d35]"
+          onClick={toggleDrawer}
+        >
+          <MenuOutlined />
+        </button>
       </div>
+
+      {/* Right: Avatar or Login/Register */}
       <div className="flex items-center">
-        {/* Kiểm tra nếu chưa đăng nhập */}
         {!authUser ? (
-          <div className="flex gap-3">
+          <div className="flex gap-2 md:gap-3">
             <Button type="primary" onClick={() => navigate("/login")}>
               Đăng nhập
             </Button>
@@ -71,7 +126,27 @@ const Header = ({ headerInfo }) => {
         )}
         <ChangePassword open={changePassword} onClose={handleChangePassword} />
       </div>
-    </div>
+
+      {/* Drawer menu for mobile */}
+      <Drawer
+        title="Menu"
+        placement="left"
+        onClose={toggleDrawer}
+        open={openDrawer}
+      >
+        <div className="flex flex-col gap-4 text-[#4a3d35] font-medium">
+          <Link to="/" onClick={toggleDrawer}>
+            Trang chủ
+          </Link>
+          <Link to="/about" onClick={toggleDrawer}>
+            Về chúng tôi
+          </Link>
+          <Link to="/caption-image" onClick={toggleDrawer}>
+            Caption ảnh
+          </Link>
+        </div>
+      </Drawer>
+    </header>
   );
 };
 
